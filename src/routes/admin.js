@@ -1,19 +1,9 @@
 const { Router } = require("express");
 
-const {
-  addAdmin,
-  editAdmin,
-  getAdmin,
-  getAdmins,
-} = require("../controllers/admin");
-const { isAdmin, isSuperAdmin } = require("../middlewares/auth");
+const { addAdmin, editAdmin, getAdmin, getAdmins } = require("../controllers/admin");
 
 const adminRouter = new Router();
 
-adminRouter
-  .get("/", isAdmin, getAdmins)
-  .get("/:_id", isAdmin, getAdmin)
-  .post("/", isSuperAdmin, addAdmin)
-  .put("/:_id", isAdmin, editAdmin)
+adminRouter.get("/", getAdmins).get("/:_id", getAdmin).post("/", addAdmin).put("/:_id", editAdmin);
 
 module.exports = adminRouter;
